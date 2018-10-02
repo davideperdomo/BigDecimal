@@ -108,8 +108,11 @@ class BigDecimal {
         numone[0]=1
         */
         long double divs = 1/((double)dvs);
-        std::ostringstream ss;
-        ss << divs;
+        //std::ostringstream ss;
+        //ss << divs;
+        
+        std::stringstream ss;
+        ss << std::fixed << std::setprecision(8) << divs;
         //std::cout << ss.str() << std::endl; 
         cout << endl; 
         cout << "double : " << divs << endl;
@@ -124,8 +127,11 @@ class BigDecimal {
         /*for(int i=0;i< sizediv ;i++){
             cout << divisor[i];
         }*/
-        int numer[sizediv];
-        if(sizediv > n){
+        cout << "--sizedivbyte: " << sizediv << " -sizestr: " << toarr.size() << " -numsize: " << n << endl; 
+        
+        //if(sizediv > n){
+        if(toarr.size() > n){
+            int numer[sizediv];
             for(int i=0;i<sizediv;i++){
                 if(i<(sizediv-n)){
                     numer[i]=0;
@@ -133,15 +139,31 @@ class BigDecimal {
                     numer[i]=num[i-(sizediv-n)];
                 }
             }
+            cout << "division: " << endl;
+            cout << " - numerador: " << endl;
+            printnumber(numer);
+            
+            return mult(numer,divisor,sizediv);
+        }else {
+            cout << "suporting .. n=" << n << endl;
+            int ndivi[n];
+            for(int i=0;i<n;i++){
+                ndivi[i]=0;
+            }
+            
+            cout << "division: " << endl;
+            cout << " - divisor: " << endl;
+            printnumber(ndivi);
+            return mult(num,ndivi,n);
         }
-        cout << "division: " << endl;
-        cout << " - numerador: " << endl;
-        printnumber(numer);
-        
-        return mult(numer,divisor,sizediv);
+
     }
 //multiply array integer < 10
     int *mult(int arr1[], int arr2[], int n){
+        cout << "In mulitiplication with size " << n << endl;
+        printnumber(arr1);
+        printnumber(arr2);
+        
         int sizearr = n;
         std::vector<int> answers;
         int *respuesta = new int[sizearr*2];
@@ -217,14 +239,12 @@ class BigDecimal {
 
 int main () {
     BigDecimal foo (10,20);   // functional form
-    //int arr1[] = {0,3,3,3,3,3,3,3,3,4};
-    //int arr2[] = {8,9,0,1,4,8,3,0,0,0};
     //El tamaño de los arreglos debe ser igual
     //string ip1 = "0333333334";
     //string ip2 = "8901483000";
     string ip1 = "010074";
     string ip2 = "010852";
-    string num1 = "010000";
+    string num1 = "100000";
     
     int *intarr1 = readint(ip1);
     int *intarr2 = readint(ip2);
@@ -239,7 +259,8 @@ int main () {
     int *restarra = foo.rest(intarr2,intarr1,ip1.size());
     std::cout << std::endl;
     int *diviarra = foo.divi(intarr1,3,ip1.size());
-    //int *diviarra2 = foo.divi(intarr3,5,ip1.size());
+    std::cout << std::endl;
+    int *diviarra2 = foo.divi(intarr3,5,ip1.size());
     //std::cout << std::endl;
     //foo.mult(arr1,arr2,10);
     std::cout << std::endl;
