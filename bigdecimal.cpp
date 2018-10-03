@@ -1,8 +1,6 @@
 /******************************************************************************
 
-                              Online C++ Compiler.
-               Code, Compile, Run and Debug C++ program online.
-Write your code in this editor and press "Run" button to compile and execute it.
+Desarrollado por David Esteban Perdomo Cristancho
 
 *******************************************************************************/
 
@@ -29,10 +27,9 @@ void printnumber(int array[]){
 
 int *readint(string s){
   int n = s.length();  
-  cout << "string input : " << s << endl;
   char char_array[n+1];  
   int *int_array = new int[n+1];
-  cout << "int array with size: " << sizeof(int_array)/sizeof(*int_array) << endl;
+  //cout << "int array with size: " << sizeof(int_array)/sizeof(*int_array) << endl;
   for (int i=0; i<sizeof(int_array); i++) int_array[i]=0; 
 
   strcpy(char_array, s.c_str());  
@@ -41,20 +38,19 @@ int *readint(string s){
         int_array[i]=char_array[i]-48; 
       }
   }
-  cout << "print int array : " << endl;
-  printnumber(int_array);
+  //cout << "ret int array : " << endl;
+  //printnumber(int_array);
   return int_array; 
 }
 
 
 class BigDecimal {
-    std::vector<int> enteros;
-    std::vector<int> decimales;
+    std::vector<int> digitos;
     int floatpoint;
 
   public:
-    BigDecimal(int r, int d) { 
-        enteros.push_back(r);
+    BigDecimal(int r) { 
+        digitos.push_back(r);
     }
     
     int *sum(int arr1[], int arr2[], int n){
@@ -66,15 +62,8 @@ class BigDecimal {
         for(int i=n;i>0;i--){
             answer[i]= (arr1[i-1]+arr2[i-1]+chksum)%10;
             chksum = (arr1[i-1]+arr2[i-1]+chksum)/10;
-        //    cout << answer[i] ;
         }
         answer[0]=chksum;
-        //print answer
-        /*
-        cout << "suma:: " ;
-        for (int i=0;i<=n;i++){
-            cout << answer[i];
-        }*/
         
         return answer;
     }
@@ -94,10 +83,10 @@ class BigDecimal {
             }
         //    cout << answer[i] ;
         }
-        cout << "resta:: " ;
+        /*cout << "resta:: " ;
         for (int i=0;i<=n;i++){
             cout << answer[i];
-        }
+        }*/
         return answer;
     }
     
@@ -108,26 +97,19 @@ class BigDecimal {
         numone[0]=1
         */
         long double divs = 1/((double)dvs);
-        //std::ostringstream ss;
-        //ss << divs;
-        
         std::stringstream ss;
-        ss << std::fixed << std::setprecision(8) << divs;
-        //std::cout << ss.str() << std::endl; 
-        cout << endl; 
-        cout << "double : " << divs << endl;
-        cout << "arr : " << ss.str() << endl;;
+        ss << std::fixed << std::setprecision(n*2) << divs;
         std::string toarr = ss.str();
-        cout << "arr alm : " << toarr << endl;
+        /*cout << endl; 
+        cout << "double : " << divs << endl;
+        cout << "arr : " << ss.str() << endl;;*/
+        //cout << "arr alm : " << toarr << endl;
         
         int *divisor = readint(toarr);
         int sizediv = sizeof(divisor);
-        cout << " - denominador: with size " << sizediv << endl;
-        printnumber(divisor);
-        /*for(int i=0;i< sizediv ;i++){
-            cout << divisor[i];
-        }*/
-        cout << "--sizedivbyte: " << sizediv << " -sizestr: " << toarr.size() << " -numsize: " << n << endl; 
+        //cout << " - denominador: with size " << sizediv << endl;
+        //printnumber(divisor);
+        //cout << "--sizedivbyte: " << sizediv << " -sizestr: " << toarr.size() << " -numsize: " << n << endl; 
         
         //if(sizediv > n){
         if(toarr.size() > n){
@@ -139,30 +121,30 @@ class BigDecimal {
                     numer[i]=num[i-(sizediv-n)];
                 }
             }
-            cout << "division: " << endl;
-            cout << " - numerador: " << endl;
-            printnumber(numer);
+            //cout << "division: " << endl;
+            //cout << " - numerador: " << endl;
+            //printnumber(numer);
             
             return mult(numer,divisor,sizediv);
         }else {
-            cout << "suporting .. n=" << n << endl;
+            //cout << "suporting .. n=" << n << endl;
             int ndivi[n];
             for(int i=0;i<n;i++){
                 ndivi[i]=0;
             }
             
-            cout << "division: " << endl;
-            cout << " - divisor: " << endl;
-            printnumber(ndivi);
+            //cout << "division: " << endl;
+            //cout << " - divisor: " << endl;
+            //printnumber(ndivi);
             return mult(num,ndivi,n);
         }
 
     }
 //multiply array integer < 10
     int *mult(int arr1[], int arr2[], int n){
-        cout << "In mulitiplication with size " << n << endl;
+        /*cout << "In mulitiplication with size " << n << endl;
         printnumber(arr1);
-        printnumber(arr2);
+        printnumber(arr2);*/
         
         int sizearr = n;
         std::vector<int> answers;
@@ -209,10 +191,10 @@ class BigDecimal {
         }
     
         //print answer
-        cout << "multiplicacion:: " ;
+        /*cout << "multiplicacion:: " ;
         for (int i=0;i<sizearr*2;i++){
             cout << respuesta[i];
-        }
+        }*/
         return respuesta;
     }
     
@@ -233,36 +215,42 @@ class BigDecimal {
         }
      
     return 4*suma;
-    //return mult(suma,5,n)
     }
 };
 
-int main () {
-    BigDecimal foo (10,20);   // functional form
+void runtest(){
+        
+    cout << "       TEST " << endl;
+    cout << endl;
+    
+    BigDecimal foo (0);   
     //El tamaño de los arreglos debe ser igual
-    //string ip1 = "0333333334";
-    //string ip2 = "8901483000";
+
     string ip1 = "010074";
     string ip2 = "010852";
-    string num1 = "100000";
     
     int *intarr1 = readint(ip1);
     int *intarr2 = readint(ip2);
-    int *intarr3 = readint(num1);
     
+    cout << ip1 << "," << ip2 << endl << endl;
+    cout << "Multiplicación: ";
     int *multiarra = foo.mult(intarr1,intarr2,ip1.size());
-    std::cout << std::endl;
+    printnumber(multiarra);
+    cout << endl;
+    cout << "Suma: ";
     int *sumarra = foo.sum(intarr1,intarr2,ip1.size());
-    cout << "suma: " ; 
-    //printnumber(sumarra)
-    std::cout << std::endl;
+    printnumber(sumarra); 
+    cout << endl;
+    cout << "Resta: ";
     int *restarra = foo.rest(intarr2,intarr1,ip1.size());
-    std::cout << std::endl;
+    printnumber(restarra);
+    cout << endl;
+    cout << "Division: ";
     int *diviarra = foo.divi(intarr1,3,ip1.size());
-    std::cout << std::endl;
-    int *diviarra2 = foo.divi(intarr3,5,ip1.size());
-    //std::cout << std::endl;
-    //foo.mult(arr1,arr2,10);
-    std::cout << std::endl;
+    printnumber(diviarra);
+}
+
+int main () {
+    runtest();
     return 0;
 }
