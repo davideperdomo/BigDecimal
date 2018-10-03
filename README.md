@@ -49,5 +49,3 @@ Se utilizan los métodos de la clase para implementar la sumatoria de la serie d
 - Actualmente, para la division se utiliza el tipo de dato Long double, por lo cual, su cálculo no es virtualmente infinito.
 - Aunque la mayor parte de los métodos de la clase son funcionales, no se ha utilizado el objeto como se esperaba, se trabajará en su utilización.
 - Se espera mejorar la utilización de arreglos y punteros, y la conversión con strings, con fin de mejorar la usabilidad del sistema.
-
-Sistema desarrollado completamente por David Esteban Perdomo
